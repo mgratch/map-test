@@ -8,6 +8,9 @@
 // make sure GV_MAPS exists
 window.GV_MAPS = window.GV_MAPS || {};
 
+
+
+
 (function($){
 
     "use strict";
@@ -30,7 +33,7 @@ window.GV_MAPS = window.GV_MAPS || {};
      * Google Map object, set up in `self.setup_map`
      */
     var maps = [];
-    self.maps = [];
+   
 
     var bounds = new google.maps.LatLngBounds();
     //var infowindow = new google.maps.InfoWindow({maxWidth:0});
@@ -67,7 +70,13 @@ window.GV_MAPS = window.GV_MAPS || {};
 
         // bind markers animations
         self.initAnimateMarkers();
+
+        GV_MAPS.GMaps = maps;
     };
+
+
+
+
 
     /**
      * Initiate the map object, stored in map
@@ -81,7 +90,7 @@ window.GV_MAPS = window.GV_MAPS || {};
 
         for( var i = 0; i <= self.multiple_maps; i++ ) {
             m = new google.maps.Map( document.getElementById( self.map_id_prefix + '-' + i.toString() ), self.MapOptions );
-            self.maps.push( m );
+            maps.push( m );
         }
 
     };
@@ -92,7 +101,7 @@ window.GV_MAPS = window.GV_MAPS || {};
      */
     self.processMarkers = function() {
         for ( var i in self.markers_info ) {
-            self.maps.forEach( self.add_marker, self.markers_info[ i ] );
+            maps.forEach( self.add_marker, self.markers_info[ i ] );
         }
     };
 
@@ -120,7 +129,7 @@ window.GV_MAPS = window.GV_MAPS || {};
 
         bounds.extend( marker.position );
 
-        self.maps[ i ].fitBounds( bounds );
+        maps[ i ].fitBounds( bounds );
 
         self.addMarkerEvents( marker );
 
